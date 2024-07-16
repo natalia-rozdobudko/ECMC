@@ -12,7 +12,7 @@ public abstract class BasePage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    public static void navigateToPage(String pageName) {
+    public void navigateToPage(String pageName) {
         WebElement button = Driver.getDriver().findElement
                 (By.xpath("//a[. = '" + pageName + "']"));
         button.click();
