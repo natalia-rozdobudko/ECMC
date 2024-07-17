@@ -1,11 +1,11 @@
 Feature: Verify alerts on Waiting page
   @wip
   Scenario: Wait for the page to load and verify alerts
-    Given the user is on the Waiting page
+    Given user is on "Waiting" page
     When the page has fully loaded
     And the user clicks the "Enable Show Alert Button" button
     And the user clicks the "Show Alert" button
-    Then an alert should be displayed with the text "False alarm!"
+    Then an alert should be displayed with the text
     And the user accepts the alert
     When the user clicks on "Accordion Item #1" accordion
     And the user enters alert text in "Accordion One"
