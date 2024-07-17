@@ -4,6 +4,7 @@ Feature: Contact Us form submission
     Given user is on "Contact Us" page
 
 #Submit a successful Contact Us request, and verify the message on the success page.
+  @wip
   Scenario Outline: Successful form submission
     When user enters "<First name>" in the "First name" field
     And user enters "<Last name>" in the "Last name" field

@@ -35,12 +35,15 @@ public class ContactUs_stepDefs {
         wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
 
         if (fieldName.equals("Message")) {
+            wait.until(ExpectedConditions.visibilityOf(contactUsPage.messageInputBox));
             contactUsPage.messageInputBox.sendKeys(text);
         } else if (fieldName.equals("City")) {
             wait.until(ExpectedConditions.visibilityOf(contactUsPage.cityInputBox));
             contactUsPage.cityInputBox.sendKeys(text);
         } else {
-            contactUsPage.getInputBox(fieldName).sendKeys(text);
+            WebElement inputBox = contactUsPage.getInputBox(fieldName);
+            wait.until(ExpectedConditions.visibilityOf(contactUsPage.cityInputBox));
+            inputBox.sendKeys(text);
         }
 
     }
@@ -69,18 +72,14 @@ public class ContactUs_stepDefs {
     }
 
     @Then("user should see message {string}")
-    public void user_should_see_message(String expectedMessageText) {
+    public void user_should_see_message(String expectedMessageText){
 
         wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(contactUsPage.successMessage));
+        wait.until(ExpectedConditions.textToBePresentInElement(contactUsPage.successMessage,expectedMessageText));
 
         //The textContent property is used to retrieve the text content of the <h2> element.
-
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         String actualMessageText = (String) js.executeScript("return arguments[0].textContent;", contactUsPage.successMessage);
-
-        System.out.println("expectedMessageText = " + expectedMessageText);
-        System.out.println("actualMessageText = " + actualMessageText);
 
         Assert.assertTrue(actualMessageText.contains(expectedMessageText));
 

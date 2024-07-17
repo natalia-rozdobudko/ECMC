@@ -36,7 +36,7 @@ public class Waiting_stepDefs {
 
         WebElement button = BrowserUtilities.getButton(buttonName);
 
-        wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(15));
+        wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(button));
 
         button.click();
@@ -56,7 +56,7 @@ public class Waiting_stepDefs {
 
     @When("the user clicks on {string} accordion")
     public void the_user_clicks_on_accordion(String accordionName){
-        wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(5));
 
         WebElement accordion = BrowserUtilities.getAccordion(accordionName);
         wait.until(ExpectedConditions.elementToBeClickable(accordion));

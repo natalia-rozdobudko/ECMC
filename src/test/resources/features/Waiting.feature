@@ -1,5 +1,5 @@
 Feature: Verify alerts on Waiting page
-  @wip
+
   Scenario: Wait for the page to load and verify alerts
     Given user is on "Waiting" page
     When the page has fully loaded
