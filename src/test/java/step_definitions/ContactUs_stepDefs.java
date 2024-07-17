@@ -4,6 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,8 @@ import utilities.ConfigurationReader;
 import utilities.Driver;
 
 import java.time.Duration;
+
+import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
 public class ContactUs_stepDefs {
     ContactUsPage contactUsPage;
@@ -71,7 +74,7 @@ public class ContactUs_stepDefs {
         wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(contactUsPage.successMessage));
 
-    //The textContent property is used to retrieve the text content of the <h2> element.
+        //The textContent property is used to retrieve the text content of the <h2> element.
 
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         String actualMessageText = (String) js.executeScript("return arguments[0].textContent;", contactUsPage.successMessage);
@@ -80,6 +83,32 @@ public class ContactUs_stepDefs {
         System.out.println("actualMessageText = " + actualMessageText);
 
         Assert.assertTrue(actualMessageText.contains(expectedMessageText));
+
+    }
+
+
+    @Then("user should see message {string} below the {string} field")
+    public void user_should_see_message_below_the_field(String expectedMessage, String fieldName) {
+        String actualMessage;
+
+        if (fieldName.equals("Agree to terms and conditions")) {
+
+            //below code give me JsonException?
+//            WebElement initialElement = contactUsPage.agreeToTerms;
+//            actualMessageElement = Driver.getDriver().findElement
+//                    (with(By.tagName("div"))
+//                            .below(initialElement)).getText();
+
+            actualMessage = contactUsPage.agreeToTermsMessages.getText();
+
+        } else {
+            WebElement inputBox = contactUsPage.getInputBox(fieldName);
+            actualMessage = Driver.getDriver().findElement
+                    (with(By.tagName("div"))
+                            .below(inputBox)).getText();
+        }
+
+        Assert.assertEquals(expectedMessage, actualMessage);
 
     }
 }

@@ -16,14 +16,16 @@ public class ContactUsPage extends BasePage {
     public WebElement messageInputBox;
     @FindBy(xpath = "//input[@placeholder = 'City']")
     public WebElement cityInputBox;
-
     @FindBy(xpath = "//input[@type = 'checkbox']")
     public WebElement checkBox;
     @FindBy(xpath = "//button[. = 'Submit form']")
     public WebElement submitButton;
-
     @FindBy(css = ".py-5.text-center>h2")
     public WebElement successMessage;
+    @FindBy(xpath = "//label[. ='Agree to terms and conditions']")
+    public WebElement agreeToTerms;
+    @FindBy(xpath = "//label[. ='Agree to terms and conditions']/following-sibling::div")
+    public WebElement agreeToTermsMessages;
 
 
     public WebElement getInputBox(String fieldName) {
